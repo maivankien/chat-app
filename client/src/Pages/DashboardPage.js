@@ -1,14 +1,17 @@
 import React from "react";
+import dotenv from "dotenv"
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 import makeToast from "../Toaster"
 
+dotenv.config()
+
 const DashboardPage = (props) => {
     const [chatrooms, setChatrooms] = React.useState([]);
     const getChatrooms = () => {
         axios
-            .get("http://localhost:8000/chatroom", {
+            .get(`${process.env.REACT_APP_DOMAIN}/chatroom`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("CC_Token"),
                 },
@@ -30,7 +33,7 @@ const DashboardPage = (props) => {
         const chatroomName = chatroomNameRef.current.value;
 
         axios
-            .post("http://localhost:8000/chatroom", {
+            .post(`${process.env.REACT_APP_DOMAIN}/chatroom`, {
                 name: chatroomName,
             }, {
                 headers: {

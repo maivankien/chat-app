@@ -1,6 +1,9 @@
 import React from "react";
+import dotenv from "dotenv"
 import axios from "axios";
 import makeToast from "../Toaster";
+
+dotenv.config()
 
 const RegisterPage = (props) => {
     const nameRef = React.createRef();
@@ -13,7 +16,7 @@ const RegisterPage = (props) => {
         const password = passwordRef.current.value;
 
         axios
-            .post("http://localhost:8000/user/register", {
+            .post(`${process.env.REACT_APP_DOMAIN}/user/register`, {
                 name,
                 email,
                 password,

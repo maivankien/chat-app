@@ -1,4 +1,5 @@
 import React from "react";
+import dotenv from 'dotenv';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
@@ -8,13 +9,15 @@ import ChatroomPage from "./Pages/ChatroomPage";
 import io from "socket.io-client";
 import makeToast from "./Toaster";
 
+dotenv.config();
+
 function App() {
     const [socket, setSocket] = React.useState(null);
 
     const setupSocket = () => {
         const token = localStorage.getItem("CC_Token");
         if (token && !socket) {
-            const newSocket = io("http://localhost:8000", {
+            const newSocket = io(process.env.REACT_APP_DOMAIN, {
                 query: {
                     token: localStorage.getItem("CC_Token"),
                 },

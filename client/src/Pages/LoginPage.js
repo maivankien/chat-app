@@ -1,7 +1,10 @@
 import React from "react";
+import dotenv from "dotenv"
 import makeToast from "../Toaster";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+
+dotenv.config()
 
 const LoginPage = (props) => {
     const emailRef = React.createRef();
@@ -12,7 +15,7 @@ const LoginPage = (props) => {
         const password = passwordRef.current.value;
 
         axios
-            .post("http://localhost:8000/user/login", {
+            .post(`${process.env.REACT_APP_DOMAIN}/user/login`, {
                 email,
                 password,
             })
