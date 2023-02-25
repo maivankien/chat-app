@@ -56,11 +56,19 @@ const DashboardPage = (props) => {
                     makeToast("error", err.response.data.message);
             });
     };
+    const logout = (event) => {
+        event.preventDefault();
+        localStorage.removeItem("CC_Token");
+        window.location.href = 'http://localhost:3000/login'
+    }
 
     const chatroomNameRef = React.createRef();
 
     return (
         <div className="card">
+            <div className="logout">
+                <a href="/login" onClick={logout}>Đăng xuất</a>
+            </div>
             <div className="cardHeader">Tất cả phòng chat</div>
             <div className="cardBody">
                 <div className="inputGroup">

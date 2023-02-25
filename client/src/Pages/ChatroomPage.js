@@ -7,7 +7,7 @@ const ChatroomPage = ({ match, socket }) => {
     const messageRef = React.useRef();
     const [userId, setUserId] = React.useState("");
 
-    const sendMessage = () => {  
+    const sendMessage = () => {
         if (socket) {
             socket.emit("chatroomMessage", {
                 chatroomId,
@@ -50,11 +50,18 @@ const ChatroomPage = ({ match, socket }) => {
         };
         //eslint-disable-next-line
     }, []);
-
+    const logout = (event) => {
+        event.preventDefault();
+        localStorage.removeItem("CC_Token");
+        window.location.href = 'http://localhost:3000/login'
+    }
     return (
         <div className="chatroomPage">
             <div className="chatroomSection">
                 <div className="cardHeader">Phòng chat</div>
+                <div className="logout">
+                    <a href="/login" onClick={logout}>Đăng xuất</a>
+                </div>
                 <div className="chatroomContent">
                     {messages.map((message, i) => (
                         <div key={i} className="message">

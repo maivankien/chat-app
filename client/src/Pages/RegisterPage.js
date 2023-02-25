@@ -23,7 +23,10 @@ const RegisterPage = (props) => {
             })
             .then((response) => {
                 makeToast("success", response.data.message);
-                props.history.push("/login");
+                setTimeout(() => {
+                    window.location.href = 'http://localhost:3000/login';
+                    props.history.push("/login");
+                }, 2000);
             })
             .catch((err) => {
                 if (
