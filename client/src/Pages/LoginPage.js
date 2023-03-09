@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dotenv from "dotenv"
 import makeToast from "../Toaster";
 import axios from "axios";
@@ -7,6 +7,9 @@ import { withRouter } from "react-router-dom";
 dotenv.config()
 
 const LoginPage = (props) => {
+    useEffect(() => {
+        document.title = "Đăng nhập";
+    }, []);
     const emailRef = React.createRef();
     const passwordRef = React.createRef();
 

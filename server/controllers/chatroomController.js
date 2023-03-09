@@ -4,9 +4,9 @@ const Chatroom = mongoose.model("Chatroom");
 exports.createChatroom = async (req, res) => {
     const { name } = req.body;
 
-    const nameRegex = /^[A-Za-z\s]+$/;
+    // const nameRegex = /^[A-Za-z\s]+$/;
 
-    if (!nameRegex.test(name)) throw "Chatroom name can contain only alphabets.";
+    // if (!nameRegex.test(name)) throw "Chatroom name can contain only alphabets.";
 
     const chatroomExists = await Chatroom.findOne({ name });
 

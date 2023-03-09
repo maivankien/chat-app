@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
 const ChatroomPage = ({ match, socket }) => {
+    useEffect(() => {
+        document.title = "Phòng chat";
+    }, []);
     const chatroomId = match.params.id;
     const [messages, setMessages] = React.useState([]);
     const messageRef = React.useRef();

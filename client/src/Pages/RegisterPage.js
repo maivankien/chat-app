@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dotenv from "dotenv"
 import axios from "axios";
 import makeToast from "../Toaster";
@@ -6,6 +6,9 @@ import makeToast from "../Toaster";
 dotenv.config()
 
 const RegisterPage = (props) => {
+    useEffect(() => {
+        document.title = "Đăng ký";
+    }, []);
     const nameRef = React.createRef();
     const emailRef = React.createRef();
     const passwordRef = React.createRef();

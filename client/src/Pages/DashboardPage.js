@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dotenv from "dotenv"
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -26,6 +26,7 @@ const DashboardPage = (props) => {
 
     React.useEffect(() => {
         getChatrooms();
+        document.title = "Dashboard";
         // eslint-disable-next-line
     }, []);
 
