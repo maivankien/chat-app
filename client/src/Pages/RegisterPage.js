@@ -19,7 +19,7 @@ const RegisterPage = (props) => {
         const password = passwordRef.current.value;
 
         axios
-            .post(`${process.env.REACT_APP_DOMAIN}/user/register`, {
+            .post(`${process.env.REACT_APP_SERVER_DOMAIN}/user/register`, {
                 name,
                 email,
                 password,
@@ -27,7 +27,7 @@ const RegisterPage = (props) => {
             .then((response) => {
                 makeToast("success", response.data.message);
                 setTimeout(() => {
-                    window.location.href = 'http://localhost:3000/login';
+                    window.location.href = '/login';
                     props.history.push("/login");
                 }, 2000);
             })

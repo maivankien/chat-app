@@ -56,12 +56,12 @@ const ChatroomPage = ({ match, socket }) => {
     const logout = (event) => {
         event.preventDefault();
         localStorage.removeItem("CC_Token");
-        window.location.href = 'http://localhost:3000/login'
+        window.location.href = '/login';
     }
     return (
         <div className="chatroomPage">
             <div className="chatroomSection">
-                <div className="cardHeader">Phòng chat</div>
+                <a href="/dashboard" className="cardHeader">Phòng chat</a>
                 <div className="logout">
                     <a href="/login" onClick={logout}>Đăng xuất</a>
                 </div>

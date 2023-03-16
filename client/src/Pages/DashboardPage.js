@@ -11,7 +11,7 @@ const DashboardPage = (props) => {
     const [chatrooms, setChatrooms] = React.useState([]);
     const getChatrooms = () => {
         axios
-            .get(`${process.env.REACT_APP_DOMAIN}/chatroom`, {
+            .get(`${process.env.REACT_APP_SERVER_DOMAIN}/chatroom`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("CC_Token"),
                 },
@@ -34,7 +34,7 @@ const DashboardPage = (props) => {
         const chatroomName = chatroomNameRef.current.value;
 
         axios
-            .post(`${process.env.REACT_APP_DOMAIN}/chatroom`, {
+            .post(`${process.env.REACT_APP_SERVER_DOMAIN}/chatroom`, {
                 name: chatroomName,
             }, {
                 headers: {
@@ -60,7 +60,7 @@ const DashboardPage = (props) => {
     const logout = (event) => {
         event.preventDefault();
         localStorage.removeItem("CC_Token");
-        window.location.href = 'http://localhost:3000/login'
+        window.location.href = '/login'
     }
 
     const chatroomNameRef = React.createRef();

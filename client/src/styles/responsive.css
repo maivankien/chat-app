@@ -1,0 +1,21 @@
+@media (min-width: 1024px) and (max-width: 1239px) {
+    .card {
+        width: 70vw;
+    }
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    .card {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 739px) {
+    .card {
+        width: 90vw;
+    }
+
+    .chatroomSection {
+        width: 90vw;
+    }
+}

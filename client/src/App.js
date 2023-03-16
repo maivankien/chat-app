@@ -17,7 +17,7 @@ function App() {
     const setupSocket = () => {
         const token = localStorage.getItem("CC_Token");
         if (token && !socket) {
-            const newSocket = io(process.env.REACT_APP_DOMAIN, {
+            const newSocket = io(process.env.REACT_APP_SERVER_DOMAIN, {
                 query: {
                     token: localStorage.getItem("CC_Token"),
                 },

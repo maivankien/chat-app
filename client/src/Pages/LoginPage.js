@@ -16,9 +16,9 @@ const LoginPage = (props) => {
     const loginUser = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-
+        
         axios
-            .post(`${process.env.REACT_APP_DOMAIN}/user/login`, {
+            .post(`${process.env.REACT_APP_SERVER_DOMAIN}/user/login`, {
                 email,
                 password,
             })
@@ -29,7 +29,7 @@ const LoginPage = (props) => {
                 props.setupSocket();
             })
             .catch((err) => {
-                // console.log(err);
+                console.log(err);
                 if (
                     err &&
                     err.response &&

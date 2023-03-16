@@ -8,6 +8,7 @@ exports.register = async (req, res) => {
 
     const emailRegex = /@gmail.com|@yahoo.com|@hotmail.com|@live.com/;
 
+    if (!name) throw "Please enter your name";
     if (!emailRegex.test(email)) throw "Email is not supported from your domain.";
     if (password.length < 6) throw "Password must be atleast 6 characters long.";
 
