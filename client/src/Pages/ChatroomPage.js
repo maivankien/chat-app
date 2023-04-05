@@ -1,46 +1,46 @@
-import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useEffect } from "react"
+import { withRouter } from "react-router-dom"
 
 const ChatroomPage = ({ match, socket }) => {
     useEffect(() => {
-        document.title = "Phòng chat";
-    }, []);
-    const chatroomId = match.params.id;
-    const [messages, setMessages] = React.useState([]);
-    const messageRef = React.useRef();
-    const [userId, setUserId] = React.useState("");
+        document.title = "Phòng chat"
+    }, [])
+    const chatroomId = match.params.id
+    const [messages, setMessages] = React.useState([])
+    const messageRef = React.useRef()
+    const [userId, setUserId] = React.useState("")
 
     const sendMessage = () => {
         if (socket) {
             socket.emit("chatroomMessage", {
                 chatroomId,
                 message: messageRef.current.value,
-            });
+            })
 
-            messageRef.current.value = "";
+            messageRef.current.value = ""
         }
-    };
+    }
 
     React.useEffect(() => {
-        const token = localStorage.getItem("CC_Token");
+        const token = localStorage.getItem("CC_Token")
         if (token) {
-            const payload = JSON.parse(atob(token.split(".")[1]));
-            setUserId(payload.id);
+            const payload = JSON.parse(atob(token.split(".")[1]))
+            setUserId(payload.id)
         }
         if (socket) {
             socket.on("newMessage", (message) => {
-                const newMessages = [...messages, message];
-                setMessages(newMessages);
-            });
+                const newMessages = [...messages, message]
+                setMessages(newMessages)
+            })
         }
         //eslint-disable-next-line
-    }, [messages]);
+    }, [messages])
 
     React.useEffect(() => {
         if (socket) {
             socket.emit("joinRoom", {
                 chatroomId,
-            });
+            })
         }
 
         return () => {
@@ -48,15 +48,15 @@ const ChatroomPage = ({ match, socket }) => {
             if (socket) {
                 socket.emit("leaveRoom", {
                     chatroomId,
-                });
+                })
             }
-        };
+        }
         //eslint-disable-next-line
-    }, []);
+    }, [])
     const logout = (event) => {
-        event.preventDefault();
-        localStorage.removeItem("CC_Token");
-        window.location.href = '/login';
+        event.preventDefault()
+        localStorage.removeItem("CC_Token")
+        window.location.href = '/login'
     }
     return (
         <div className="chatroomPage">
@@ -88,7 +88,7 @@ const ChatroomPage = ({ match, socket }) => {
                             ref={messageRef}
                             onKeyDown={(event) => {
                                 if (event.key === "Enter") {
-                                    sendMessage();
+                                    sendMessage()
                                 }
                             }}
                         />
@@ -101,7 +101,7 @@ const ChatroomPage = ({ match, socket }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default withRouter(ChatroomPage);
+export default withRouter(ChatroomPage)

@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"
 import dotenv from "dotenv"
-import makeToast from "../Toaster";
-import axios from "axios";
-import { withRouter } from "react-router-dom";
+import makeToast from "../Toaster"
+import axios from "axios"
+import { withRouter } from "react-router-dom"
 
 dotenv.config()
 
 const LoginPage = (props) => {
     useEffect(() => {
-        document.title = "Đăng nhập";
-    }, []);
-    const emailRef = React.createRef();
-    const passwordRef = React.createRef();
+        document.title = "Đăng nhập"
+    }, [])
+    const emailRef = React.createRef()
+    const passwordRef = React.createRef()
 
     const loginUser = () => {
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
+        const email = emailRef.current.value
+        const password = passwordRef.current.value
         
         axios
             .post(`${process.env.REACT_APP_SERVER_DOMAIN}/user/login`, {
@@ -23,22 +23,22 @@ const LoginPage = (props) => {
                 password,
             })
             .then((response) => {
-                makeToast("success", response.data.message);
-                localStorage.setItem("CC_Token", response.data.token);
-                props.history.push("/dashboard");
-                props.setupSocket();
+                makeToast("success", response.data.message)
+                localStorage.setItem("CC_Token", response.data.token)
+                props.history.push("/dashboard")
+                props.setupSocket()
             })
             .catch((err) => {
-                console.log(err);
+                console.log(err)
                 if (
                     err &&
                     err.response &&
                     err.response.data &&
                     err.response.data.message
                 )
-                    makeToast("error", err.response.data.message);
-            });
-    };
+                    makeToast("error", err.response.data.message)
+            })
+    }
 
     return (
         <div className="card">
@@ -71,7 +71,7 @@ const LoginPage = (props) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default withRouter(LoginPage);
+export default withRouter(LoginPage)

@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"
 import dotenv from "dotenv"
-import axios from "axios";
-import { Link } from "react-router-dom";
+import axios from "axios"
+import { Link } from "react-router-dom"
 
 import makeToast from "../Toaster"
 
 dotenv.config()
 
 const DashboardPage = (props) => {
-    const [chatrooms, setChatrooms] = React.useState([]);
+    const [chatrooms, setChatrooms] = React.useState([])
     const getChatrooms = () => {
         axios
             .get(`${process.env.REACT_APP_SERVER_DOMAIN}/chatroom`, {
@@ -17,21 +17,21 @@ const DashboardPage = (props) => {
                 },
             })
             .then((response) => {
-                setChatrooms(response.data);
+                setChatrooms(response.data)
             })
             .catch((err) => {
-                setTimeout(getChatrooms, 3000);
-            });
-    };
+                setTimeout(getChatrooms, 3000)
+            })
+    }
 
     React.useEffect(() => {
-        getChatrooms();
-        document.title = "Dashboard";
+        getChatrooms()
+        document.title = "Dashboard"
         // eslint-disable-next-line
-    }, []);
+    }, [])
 
     const createChatroom = () => {
-        const chatroomName = chatroomNameRef.current.value;
+        const chatroomName = chatroomNameRef.current.value
 
         axios
             .post(`${process.env.REACT_APP_SERVER_DOMAIN}/chatroom`, {
@@ -42,28 +42,28 @@ const DashboardPage = (props) => {
                 },
             })
             .then((response) => {
-                makeToast("success", response.data.message);
-                getChatrooms();
-                chatroomNameRef.current.value = "";
+                makeToast("success", response.data.message)
+                getChatrooms()
+                chatroomNameRef.current.value = ""
             })
             .catch((err) => {
-                // console.log(err);
+                // console.log(err)
                 if (
                     err &&
                     err.response &&
                     err.response.data &&
                     err.response.data.message
                 )
-                    makeToast("error", err.response.data.message);
-            });
-    };
+                    makeToast("error", err.response.data.message)
+            })
+    }
     const logout = (event) => {
-        event.preventDefault();
-        localStorage.removeItem("CC_Token");
+        event.preventDefault()
+        localStorage.removeItem("CC_Token")
         window.location.href = '/login'
     }
 
-    const chatroomNameRef = React.createRef();
+    const chatroomNameRef = React.createRef()
 
     return (
         <div className="card">
@@ -95,7 +95,7 @@ const DashboardPage = (props) => {
                 ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default DashboardPage;
+export default DashboardPage

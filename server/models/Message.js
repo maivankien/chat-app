@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const messageSchema = new mongoose.Schema({
     chatroom: {
@@ -15,6 +15,6 @@ const messageSchema = new mongoose.Schema({
         type: String,
         required: "Message is required!",
     },
-});
+})
 
-module.exports = mongoose.model("Message", messageSchema);
+module.exports = mongoose.model("Message", messageSchema)

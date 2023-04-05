@@ -1,46 +1,46 @@
-import React from "react";
-import dotenv from 'dotenv';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import LoginPage from "./Pages/LoginPage";
-import RegisterPage from "./Pages/RegisterPage";
-import DashboardPage from "./Pages/DashboardPage";
-import IndexPage from "./Pages/IndexPage";
-import ChatroomPage from "./Pages/ChatroomPage";
-import io from "socket.io-client";
-import makeToast from "./Toaster";
+import React from "react"
+import dotenv from 'dotenv'
+import { BrowserRouter, Switch, Route } from "react-router-dom"
+import LoginPage from "./Pages/LoginPage"
+import RegisterPage from "./Pages/RegisterPage"
+import DashboardPage from "./Pages/DashboardPage"
+import IndexPage from "./Pages/IndexPage"
+import ChatroomPage from "./Pages/ChatroomPage"
+import io from "socket.io-client"
+import makeToast from "./Toaster"
 
-dotenv.config();
+dotenv.config()
 
 function App() {
-    const [socket, setSocket] = React.useState(null);
+    const [socket, setSocket] = React.useState(null)
 
     const setupSocket = () => {
-        const token = localStorage.getItem("CC_Token");
+        const token = localStorage.getItem("CC_Token")
         if (token && !socket) {
             const newSocket = io(process.env.REACT_APP_SERVER_DOMAIN, {
                 query: {
                     token: localStorage.getItem("CC_Token"),
                 },
-            });
+            })
 
             newSocket.on("disconnect", () => {
-                setSocket(null);
-                setTimeout(setupSocket, 3000);
-                makeToast("error", "Socket Disconnected!");
-            });
+                setSocket(null)
+                setTimeout(setupSocket, 3000)
+                makeToast("error", "Socket Disconnected!")
+            })
 
             newSocket.on("connect", () => {
-                makeToast("success", "Socket Connected!");
-            });
+                makeToast("success", "Socket Connected!")
+            })
 
-            setSocket(newSocket);
+            setSocket(newSocket)
         }
-    };
+    }
 
     React.useEffect(() => {
-        setupSocket();
+        setupSocket()
         //eslint-disable-next-line
-    }, []);
+    }, [])
 
     return (
         <BrowserRouter>
@@ -64,7 +64,7 @@ function App() {
                 />
             </Switch>
         </BrowserRouter>
-    );
+    )
 }
 
-export default App;
+export default App
